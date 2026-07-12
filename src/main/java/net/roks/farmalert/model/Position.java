@@ -22,5 +22,6 @@ public record Position(double x, double y, double z) {
         return withinX(target.x(), xTolerance)
                 && withinY(target.y(), yTolerance)
                 && withinZ(target.z(), zTolerance);
+
     }
 }
