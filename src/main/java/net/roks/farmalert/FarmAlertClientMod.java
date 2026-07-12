@@ -3,8 +3,7 @@ package net.roks.farmalert;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
+import net.roks.farmalert.service.TitleService;
 
 public class FarmAlertClientMod implements ClientModInitializer {
 
@@ -27,9 +26,11 @@ public class FarmAlertClientMod implements ClientModInitializer {
 
                 ticks = 0;
 
-                minecraft.gui.setTimes(5, 40, 10);
-                minecraft.gui.setTitle(Component.literal("TEST"));
+                TitleService.show(minecraft, "TEST");
+
             }
+
         });
+
     }
 }
