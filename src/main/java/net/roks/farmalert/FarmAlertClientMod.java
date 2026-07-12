@@ -1,5 +1,6 @@
 package net.roks.farmalert;
 
+import net.roks.farmalert.config.screen.ConfigScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.roks.farmalert.service.PositionService;
@@ -24,7 +25,11 @@ public class FarmAlertClientMod implements ClientModInitializer {
 
             while (KeyBindings.OPEN_CONFIG.consumeClick()) {
 
-                minecraft.setScreen(new FarmAlertScreen());
+                minecraft.setScreen(
+                        ConfigScreen.create(
+                                minecraft.screen
+                        )
+                );
 
             }
 
