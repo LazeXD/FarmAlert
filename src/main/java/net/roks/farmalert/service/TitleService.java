@@ -3,20 +3,23 @@ package net.roks.farmalert.service;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 
-public final class TitleService {
+import net.roks.farmalert.constant.Constants;
 
-    private static final int DEFAULT_FADE_IN = 5;
-    private static final int DEFAULT_STAY = 40;
-    private static final int DEFAULT_FADE_OUT = 10;
+public final class TitleService {
 
     private TitleService() {
     }
 
-    public static void show(Minecraft minecraft,
-                            String title,
+    private static Minecraft getMinecraft() {
+        return Minecraft.getInstance();
+    }
+
+    public static void show(String title,
                             int fadeIn,
                             int stay,
                             int fadeOut) {
+
+        Minecraft minecraft = getMinecraft();
 
         if (minecraft == null || minecraft.player == null) {
             return;
@@ -26,26 +29,26 @@ public final class TitleService {
         minecraft.gui.setTitle(Component.literal(title));
     }
 
-    public static void show(Minecraft minecraft, String title) {
+    public static void show(String title) {
 
         show(
-                minecraft,
                 title,
-                DEFAULT_FADE_IN,
-                DEFAULT_STAY,
-                DEFAULT_FADE_OUT
+                Constants.DEFAULT_TITLE_FADE_IN,
+                Constants.DEFAULT_TITLE_STAY,
+                Constants.DEFAULT_TITLE_FADE_OUT
         );
-    }
-
-    public static void showEndOfFarm(Minecraft minecraft) {
-
-        show(minecraft, "END OF FARM");
 
     }
 
-    public static void showTeleportNow(Minecraft minecraft) {
+    public static void showEndOfFarm() {
 
-        show(minecraft, "TELEPORT NOW");
+        show(Constants.TITLE_END_OF_FARM);
+
+    }
+
+    public static void showTeleportNow() {
+
+        show(Constants.TITLE_TELEPORT_NOW);
 
     }
 }

@@ -26,7 +26,7 @@ public class FarmAlertClientMod implements ClientModInitializer {
 
                 ticks = 0;
 
-                TitleService.show(minecraft, "TEST");
+                TitleService.showEndOfFarm();
 
             }
 
