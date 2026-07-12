@@ -22,6 +22,7 @@ public final class ConfigScreen {
     public static Screen create(Screen parent) {
 
         ConfigBuilder builder = ConfigBuilder.create();
+        builder.setSavingRunnable(ConfigService::save);
         FarmAlertConfig config = ConfigService.getConfig();
         EdgeConfig edgeConfig = config.edge;
         TeleportConfig teleport = config.teleport;

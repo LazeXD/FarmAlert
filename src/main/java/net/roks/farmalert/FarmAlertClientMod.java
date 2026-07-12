@@ -1,5 +1,6 @@
 package net.roks.farmalert;
 
+import net.roks.farmalert.service.ConfigService;
 import net.roks.farmalert.config.screen.ConfigScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -15,6 +16,7 @@ public class FarmAlertClientMod implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        ConfigService.load();
         KeyBindings.register();
 
         FarmAlert.LOGGER.info("FarmAlert client loaded.");
