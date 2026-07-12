@@ -1,7 +1,8 @@
 package net.roks.farmalert.config.screen;
 
-import net.roks.farmalert.service.ConfigService;
 
+import net.roks.farmalert.service.ConfigService;
+import net.roks.farmalert.constant.Constants;
 import net.roks.farmalert.config.FarmAlertConfig;
 import net.roks.farmalert.config.EdgeConfig;
 import net.roks.farmalert.config.TeleportConfig;
@@ -162,6 +163,83 @@ public final class ConfigScreen {
                         .build()
 
         );
+        teleportDetection.add(
+
+                entryBuilder.startDoubleField(
+                                Component.literal("Target X"),
+                                teleport.targetX
+                        )
+                        .setDefaultValue(0.0)
+                        .setSaveConsumer(value -> teleport.targetX = value)
+                        .build()
+
+        );
+        teleportDetection.add(
+
+                entryBuilder.startDoubleField(
+                                Component.literal("Target Y"),
+                                teleport.targetY
+                        )
+                        .setDefaultValue(0.0)
+                        .setSaveConsumer(value -> teleport.targetY = value)
+                        .build()
+
+        );
+        teleportDetection.add(
+
+                entryBuilder.startDoubleField(
+                                Component.literal("Target Z"),
+                                teleport.targetZ
+                        )
+                        .setDefaultValue(0.0)
+                        .setSaveConsumer(value -> teleport.targetZ = value)
+                        .build()
+
+        );
+        teleportDetection.add(
+
+                entryBuilder.startDoubleField(
+                                Component.literal("X Tolerance"),
+                                teleport.xTolerance
+                        )
+                        .setDefaultValue(Constants.DEFAULT_TELEPORT_TOLERANCE)
+                        .setSaveConsumer(value -> teleport.xTolerance = value)
+                        .build()
+
+        );
+        teleportDetection.add(
+
+                entryBuilder.startDoubleField(
+                                Component.literal("Y Tolerance"),
+                                teleport.yTolerance
+                        )
+                        .setDefaultValue(Constants.DEFAULT_TELEPORT_TOLERANCE)
+                        .setSaveConsumer(value -> teleport.yTolerance = value)
+                        .build()
+
+        );
+        teleportDetection.add(
+
+                entryBuilder.startDoubleField(
+                                Component.literal("Z Tolerance"),
+                                teleport.zTolerance
+                        )
+                        .setDefaultValue(Constants.DEFAULT_TELEPORT_TOLERANCE)
+                        .setSaveConsumer(value -> teleport.zTolerance = value)
+                        .build()
+
+        );
+        teleportDetection.add(
+
+                entryBuilder.startStrField(
+                                Component.literal("Command"),
+                                teleport.command
+                        )
+                        .setDefaultValue("")
+                        .setSaveConsumer(value -> teleport.command = value)
+                        .build()
+
+        );
 
         edgeCategory.addEntry(
                 xAxis.build()
@@ -169,6 +247,10 @@ public final class ConfigScreen {
 
         edgeCategory.addEntry(
                 zAxis.build()
+        );
+
+        teleportCategory.addEntry(
+                teleportDetection.build()
         );
 
         return builder.build();
