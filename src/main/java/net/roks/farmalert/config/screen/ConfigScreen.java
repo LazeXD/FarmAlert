@@ -1,5 +1,11 @@
 package net.roks.farmalert.config.screen;
 
+import net.roks.farmalert.service.ConfigService;
+
+import net.roks.farmalert.config.FarmAlertConfig;
+import net.roks.farmalert.config.EdgeConfig;
+import net.roks.farmalert.config.TeleportConfig;
+
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
@@ -15,6 +21,8 @@ public final class ConfigScreen {
     public static Screen create(Screen parent) {
 
         ConfigBuilder builder = ConfigBuilder.create();
+        FarmAlertConfig config = ConfigService.getConfig();
+        EdgeConfig edgeConfig = config.edge;
 
         builder.setParentScreen(parent);
 
@@ -29,6 +37,17 @@ public final class ConfigScreen {
 
         ConfigEntryBuilder entryBuilder =
                 builder.entryBuilder();
+        edge.addEntry(
+
+                entryBuilder.startBooleanToggle(
+                                Component.literal("Enable X"),
+                                config.edge.xEnabled
+                        )
+                        .setDefaultValue(true)
+                        .setSaveConsumer(value -> config.edge.xEnabled = value)
+                        .build()
+
+        );
 
         return builder.build();
 
