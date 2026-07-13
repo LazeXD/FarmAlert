@@ -24,7 +24,6 @@ public final class ConfigScreen {
         ConfigBuilder builder = ConfigBuilder.create();
         builder.setSavingRunnable(ConfigService::save);
         FarmAlertConfig config = ConfigService.getConfig();
-        EdgeConfig edgeConfig = config.edge;
         TeleportConfig teleport = config.teleport;
 
         builder.setParentScreen(parent);
@@ -96,10 +95,11 @@ public final class ConfigScreen {
         xAxis.add(
 
                 entryBuilder.startDoubleField(
-                                Component.literal("X Tolerance"),
+                                Component.translatable("setting.x_tolerance"),
                                 edge.xTolerance
                         )
-                        .setDefaultValue(0.15)
+                        .setDefaultValue(Constants.DEFAULT_EDGE_TOLERANCE)
+                        .setMin(0.0)
                         .setSaveConsumer(value -> edge.xTolerance = value)
                         .build()
 
@@ -144,10 +144,11 @@ public final class ConfigScreen {
         zAxis.add(
 
                 entryBuilder.startDoubleField(
-                                Component.literal("Z Tolerance"),
+                                Component.translatable("setting.z_tolerance"),
                                 edge.zTolerance
                         )
-                        .setDefaultValue(0.15)
+                        .setDefaultValue(Constants.DEFAULT_EDGE_TOLERANCE)
+                        .setMin(0.0)
                         .setSaveConsumer(value -> edge.zTolerance = value)
                         .build()
 
@@ -156,7 +157,7 @@ public final class ConfigScreen {
         teleportDetection.add(
 
                 entryBuilder.startBooleanToggle(
-                                Component.literal("Enable"),
+                                Component.translatable("setting.enable"),
                                 teleport.enabled
                         )
                         .setDefaultValue(true)
@@ -204,6 +205,7 @@ public final class ConfigScreen {
                                 teleport.xTolerance
                         )
                         .setDefaultValue(Constants.DEFAULT_TELEPORT_TOLERANCE)
+                        .setMin(0.0)
                         .setSaveConsumer(value -> teleport.xTolerance = value)
                         .build()
 
@@ -215,6 +217,7 @@ public final class ConfigScreen {
                                 teleport.yTolerance
                         )
                         .setDefaultValue(Constants.DEFAULT_TELEPORT_TOLERANCE)
+                        .setMin(0.0)
                         .setSaveConsumer(value -> teleport.yTolerance = value)
                         .build()
 
@@ -226,6 +229,7 @@ public final class ConfigScreen {
                                 teleport.zTolerance
                         )
                         .setDefaultValue(Constants.DEFAULT_TELEPORT_TOLERANCE)
+                        .setMin(0.0)
                         .setSaveConsumer(value -> teleport.zTolerance = value)
                         .build()
 
