@@ -1,6 +1,5 @@
 package net.roks.farmalert.config.screen;
 
-
 import net.roks.farmalert.service.ConfigService;
 import net.roks.farmalert.constant.Constants;
 import net.roks.farmalert.config.FarmAlertConfig;
@@ -23,7 +22,9 @@ public final class ConfigScreen {
 
         ConfigBuilder builder = ConfigBuilder.create();
         builder.setSavingRunnable(ConfigService::save);
+
         FarmAlertConfig config = ConfigService.getConfig();
+        EdgeConfig edge = config.edge;
         TeleportConfig teleport = config.teleport;
 
         builder.setParentScreen(parent);
@@ -36,13 +37,14 @@ public final class ConfigScreen {
                 builder.getOrCreateCategory(
                         Component.translatable("category.edge")
                 );
+
         ConfigCategory teleportCategory =
                 builder.getOrCreateCategory(
                         Component.translatable("category.teleport")
                 );
 
-        ConfigEntryBuilder entryBuilder =
-                builder.entryBuilder();
+        ConfigEntryBuilder entryBuilder = builder.entryBuilder();
+
         var xAxis = entryBuilder.startSubCategory(
                 Component.translatable("subcategory.x")
         );
@@ -54,7 +56,6 @@ public final class ConfigScreen {
         var teleportDetection = entryBuilder.startSubCategory(
                 Component.translatable("subcategory.teleport")
         );
-        EdgeConfig edge = config.edge;
 
         xAxis.add(
 
@@ -108,7 +109,7 @@ public final class ConfigScreen {
         zAxis.add(
 
                 entryBuilder.startBooleanToggle(
-                                Component.literal("Enable"),
+                                Component.translatable("setting.enable"),
                                 edge.zEnabled
                         )
                         .setDefaultValue(true)
@@ -165,6 +166,7 @@ public final class ConfigScreen {
                         .build()
 
         );
+
         teleportDetection.add(
 
                 entryBuilder.startDoubleField(
@@ -176,6 +178,7 @@ public final class ConfigScreen {
                         .build()
 
         );
+
         teleportDetection.add(
 
                 entryBuilder.startDoubleField(
@@ -187,6 +190,7 @@ public final class ConfigScreen {
                         .build()
 
         );
+
         teleportDetection.add(
 
                 entryBuilder.startDoubleField(
@@ -198,6 +202,7 @@ public final class ConfigScreen {
                         .build()
 
         );
+
         teleportDetection.add(
 
                 entryBuilder.startDoubleField(
@@ -210,6 +215,7 @@ public final class ConfigScreen {
                         .build()
 
         );
+
         teleportDetection.add(
 
                 entryBuilder.startDoubleField(
@@ -222,6 +228,7 @@ public final class ConfigScreen {
                         .build()
 
         );
+
         teleportDetection.add(
 
                 entryBuilder.startDoubleField(
@@ -234,6 +241,7 @@ public final class ConfigScreen {
                         .build()
 
         );
+
         teleportDetection.add(
 
                 entryBuilder.startStrField(
@@ -246,17 +254,10 @@ public final class ConfigScreen {
 
         );
 
-        edgeCategory.addEntry(
-                xAxis.build()
-        );
+        edgeCategory.addEntry(xAxis.build());
+        edgeCategory.addEntry(zAxis.build());
 
-        edgeCategory.addEntry(
-                zAxis.build()
-        );
-
-        teleportCategory.addEntry(
-                teleportDetection.build()
-        );
+        teleportCategory.addEntry(teleportDetection.build());
 
         return builder.build();
 
