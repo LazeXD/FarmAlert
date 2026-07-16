@@ -11,16 +11,24 @@ import net.roks.farmalert.config.TeleportConfig;
 import net.roks.farmalert.constant.Constants;
 import net.roks.farmalert.service.ConfigService;
 
+/**
+ * Factory class for creating the Cloth Config GUI screen.
+ */
 public final class ConfigScreen {
 
     private ConfigScreen() {
     }
 
+    /**
+     * Builds and returns the configuration screen using Cloth Config.
+     */
     public static Screen create(Screen parent) {
 
+        // Initialize Builder and save handler
         ConfigBuilder builder = ConfigBuilder.create();
         builder.setSavingRunnable(ConfigService::save);
 
+        // Fetch current configurations
         FarmAlertConfig config = ConfigService.getConfig();
         EdgeConfig edge = config.edge;
         TeleportConfig teleport = config.teleport;
@@ -31,6 +39,7 @@ public final class ConfigScreen {
                 Component.translatable("farmalert.title")
         );
 
+        // Create main configuration categories
         ConfigCategory edgeCategory =
                 builder.getOrCreateCategory(
                         Component.translatable("category.edge")
@@ -43,6 +52,7 @@ public final class ConfigScreen {
 
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
+        // Create subcategories
         var xAxis = entryBuilder.startSubCategory(
                 Component.translatable("subcategory.x")
         );
