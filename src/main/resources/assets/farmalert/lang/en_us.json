@@ -31,5 +31,8 @@
   "setting.command": "Command",
 
   "validation.non_negative": "Value must be 0 or greater.",
-  "validation.min_max": "Minimum value must not be greater than maximum value."
+  "validation.min_max": "Minimum value must not be greater than maximum value.",
+
+  "farmalert.title.end_of_farm": "END OF FARM",
+  "farmalert.title.teleport_now": "TELEPORT NOW"
 }
