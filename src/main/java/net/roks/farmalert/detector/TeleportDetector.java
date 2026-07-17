@@ -28,7 +28,7 @@ public final class TeleportDetector {
      */
     public static void check() {
 
-        TeleportConfig config = ConfigService.getConfig().teleport;
+        TeleportConfig config = ConfigService.getConfig().getActiveProfile().teleport;
 
         // Reset state if disabled
         if (!config.enabled) {
